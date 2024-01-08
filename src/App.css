@@ -1,38 +1,170 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+input:focus {
+  outline: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: rgb(68,68,68);
+}
+
+.title-container {
+  display: flex;
+  width: 100%;
+  margin: 0px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-content: center;
+  background-color: rgb(43, 43, 43);
+}
+
+.bottom-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  flex-direction: row;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  background-color: rgb(60,60,60);
+}
+
+#title-text {
+  font-family: Titillium-SemiBold;
   color: white;
+  height: min-content;
+  margin: 0px;
+  padding-top: 10px;
+  font-size: 20px;
+  padding-bottom: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+#prompt-input {
+  display: flex;
+  height: 30px; 
+  border: 0px;  
+  align-self: center;
+  width: 100%;
+  margin-left: 15px;
+  margin-right: 10px;
+  background-color: rgb(60,60,60);
+  border: 1px;
+  border-color: rgb(41, 41, 41);
+  border-style: solid;
+  border-radius: 5px;
+  color: rgb(225, 225, 225);
+  font-family: Titillium-Light;
+  padding-left: 7px;
+  padding-right: 7px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#ask-prompt {
+  height: 30px;
+  width: 30px;
+  align-self: center;
+  border: 0px;
+  margin-right: 15px;
+  background-image: url('../public/send-icon.png');
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgb(60, 60, 60);
+  border-radius: 5px;
+}
+
+#ask-prompt:hover {
+  background-color: rgba(27, 27, 27, 0.2);
+}
+
+#ask-prompt:active {
+  background-color: rgba(27, 27, 27, 0.5);
+}
+
+#delete-chat {
+  background-image: url('../public/trash-icon.png');
+  background-size: 20px 20px;
+  background-color: rgb(60, 60, 60);
+  border: 0px;
+  margin-left: 10px;
+  height: 30px;
+  width: 30px;
+  align-self: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  justify-content: baseline;
+  border-radius: 5px;
+}
+
+#delete-chat:hover {
+  background-color: rgba(27, 27, 27, 0.2);
+}
+
+#delete-chat:active {
+  background-color: rgba(27, 27, 27, 0.5);
+}
+
+
+@font-face {
+  font-family: Titillium-Black;
+  src: url(../public/Fonts/Titillium/TitilliumWeb-Black.ttf)
+}
+
+@font-face {
+  font-family: Titillium-Bold;
+  src: url(../public/Fonts/Titillium/TitilliumWeb-Bold.ttf)
+}
+
+@font-face {
+  font-family: Titillium-Bold-Italic;
+  src: url(../public/Fonts/Titillium/TitilliumWeb-BoldItalic.ttf)
+}
+
+@font-face {
+  font-family: Titillium-SemiBold;
+  src: url(../public/Fonts/Titillium/TitilliumWeb-SemiBold.ttf)
+}
+
+@font-face {
+  font-family: Titillium-SemiBold-Italic;
+  src: url(../public/Fonts/Titillium/TitilliumWeb-SemiBoldItalic.ttf)
+}
+
+@font-face {
+  font-family: Titillium-Regular;
+  src: url(../public/Fonts/Titillium/TitilliumWeb-Regular.ttf)
+}
+
+@font-face {
+  font-family: Titillium-Regular-Italic;
+  src: url(../public/Fonts/Titillium/TitilliumWeb-Italic.ttf)
+}
+
+@font-face {
+  font-family: Titillium-Light;
+  src: url(../public/Fonts/Titillium/TitilliumWeb-Light.ttf)
+}
+
+@font-face {
+  font-family: Titillium-Light-Italic;
+  src: url(../public/Fonts/Titillium/TitilliumWeb-LightItalic.ttf)
+}
+
+@font-face {
+  font-family: Titillium-ExtraLight;
+  src: url(../public/Fonts/Titillium/TitilliumWeb-ExtraLight.ttf)
+}
+
+@font-face {
+  font-family: Titillium-ExtraLight-Itliac;
+  src: url(../public/Fonts/Titillium/TitilliumWeb-ExtraLightItalic.ttf)
 }
