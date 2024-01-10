@@ -8,6 +8,20 @@ input:focus {
   outline: none;
 }
 
+::-webkit-scrollbar {
+  width: 7px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(31, 31, 31);
+  border-radius: 10px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -25,6 +39,14 @@ input:focus {
   justify-content: center;
   align-content: center;
   background-color: rgb(43, 43, 43);
+}
+
+.convo-container {
+  overflow: auto;
+  position: absolute;
+  width: 100%;
+  top: 50px;
+  bottom: 50px;
 }
 
 .bottom-container {
@@ -98,10 +120,10 @@ input:focus {
   margin-left: 10px;
   height: 30px;
   width: 30px;
-  align-self: center;
   background-repeat: no-repeat;
   background-position: center;
-  justify-content: baseline;
+  justify-content: center;
+  align-self: center;
   border-radius: 5px;
 }
 
@@ -111,6 +133,31 @@ input:focus {
 
 #delete-chat:active {
   background-color: rgba(27, 27, 27, 0.5);
+}
+
+#open-settings {
+  position: absolute;
+  right: 0px;
+  margin-right: 15px;
+  background-image: url('../public/settings-icon.png');
+  background-size: 20px 20px;
+  background-color: rgb(43, 43, 43);
+  border: 0px;
+  height: 30px;
+  width: 30px;
+  align-self: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  justify-content: baseline;
+  border-radius: 5px;
+}
+
+#open-settings:hover {
+  background-color: rgba(17, 17, 17, 0.2);
+}
+
+#open-settings:active {
+  background-color: rgba(17, 17, 17, 0.5);
 }
 
 

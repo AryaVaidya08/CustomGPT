@@ -11,10 +11,18 @@ const colors = {
 let previousMessages = []
 let previousTyped = ""
 let messageText = ""
-let username = prompt("What is your name?")
+let username = ""
+let lastMessageHuman = false
 
 if (localStorage.getItem("Chat Messages") != null) {
   previousMessages = JSON.parse(localStorage.getItem("Chat Messages"));
+}
+
+if (localStorage.getItem("Username") != null) {
+  username = localStorage.getItem("Username");
+} else {
+  username = prompt("What is your username?");
+  localStorage.setItem("Username", username);
 }
 
 export default function App() {
@@ -22,7 +30,8 @@ export default function App() {
 
   useEffect(() => {
     localStorage.setItem("Chat Messages", JSON.stringify(chatMessages)); 
-    if (chatMessages.length % 2 === 1) {
+    if (lastMessageHuman) {
+      //sendMessage("Generating...", "AryaGPT", false);
       getBotResponse(messageText);
     }
   }, [chatMessages]);
@@ -32,9 +41,34 @@ export default function App() {
     previousTyped = ""
   }
 
+  const changeUsername = () => {
+    let tempUsername = prompt("What is your new username?");
+    if (window.confirm(`Are you sure you want to change your username from:\n${username} --> ${tempUsername}`) == true) {
+      let tempArray = [];
+      for (let i = 0; i < chatMessages.length; i++) {
+        const newMessage = {"Person" : chatMessages[i].Human == false ? chatMessages[i].Person : tempUsername,
+                        "Message" : chatMessages[i].Message,
+                        "Human" : chatMessages[i].Human};
+        tempArray.push(newMessage);
+      }
+      setChatMessages(tempArray);
+      username = tempUsername;
+      localStorage.setItem("Username", tempUsername);
+    }
+  }
+
+  const changeSettings = () => {
+    let wantToChange = prompt("Do you want to change your username (y/n)?");
+    wantToChange = wantToChange != null ? wantToChange : "n";
+    if (wantToChange.toLowerCase() === "y" || wantToChange.toLowerCase() === "yes") {
+      changeUsername();
+    }
+  }
+
   const getBotResponse = (prompt) => {
     const output = getResponse(prompt);
     output.then((value) => {
+      lastMessageHuman = false;
       sendMessage(value, "AryaGPT",  false);
     })
   }
@@ -42,6 +76,7 @@ export default function App() {
   const sendHumanMessage = () => {
     messageText = document.getElementById("prompt-input").value
     if (messageText === "") { alert("Please enter in a prompt!"); return; }
+    lastMessageHuman = true;
     sendMessage(messageText, username, true);
     document.getElementById("prompt-input").value = ""
   }
@@ -55,6 +90,10 @@ export default function App() {
     for (let i = 0; i < chatMessages.length; i++) {
       tempArray.push(chatMessages[i]);
     }
+    if (!humanResponse && text === 'Generating...') {
+      //tempArray.pop();
+    }
+
     tempArray.push(newMessage);
     setChatMessages(tempArray);
   }
@@ -72,6 +111,7 @@ export default function App() {
     <div class="container">
         <div class="title-container">
             <p id="title-text">AryaGPT v0.1</p>
+            <button id="open-settings" onClick={changeSettings}/>
         </div>
         
         <div class="convo-container">
@@ -85,8 +125,8 @@ export default function App() {
             ))}
         </div>
         <div class="bottom-container">
-            <button type='text' id="delete-chat" onClick={removeMessages}/>
-            <input id="prompt-input" name="input" placeholder='Enter Prompt!' onKeyDown={enterClicked}/>
+            <button id="delete-chat" onClick={removeMessages}/>
+            <input id="prompt-input" name="input" placeholder='Enter Prompt!' autoComplete='off' onKeyDown={enterClicked}/>
             <button id="ask-prompt" onClick={sendHumanMessage}/>
         </div>
     </div>
